@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\AuthenticateApi;
+use App\Http\Middleware\GuestApi;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -11,7 +13,10 @@ class AuthController extends Controller implements HasMiddleware
 {
     
     public static function middleware(): array {
-        return [ new Middleware('auth:api', only: ['logout']) ];
+        return [
+            new Middleware(AuthenticateApi::class, except: ['login']),
+            new Middleware(GuestApi::class, only: ['login']),
+        ];
     }
     
     public function login(Request $request)

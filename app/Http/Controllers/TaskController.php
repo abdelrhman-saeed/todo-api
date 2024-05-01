@@ -63,6 +63,8 @@ class TaskController extends Controller implements HasMiddleware
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
+        $task->fill($request->validated())->save();
+        
         Task::whereIn('id', $request->dependecies)
                 ->update(['parent_task_id' => $task->id]);
     }

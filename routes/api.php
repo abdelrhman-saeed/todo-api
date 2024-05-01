@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,3 +15,5 @@ Route::controller(AuthController::class)
         }
 );
 
+Route::apiResource('tasks', TaskController::class)
+        ->missing( fn () => response('resource not found', 404) );

@@ -38,7 +38,7 @@ class AuthController extends Controller implements HasMiddleware
             $refreshToken = auth()->refresh(true, true);
         }
         catch(TokenInvalidException $e) {
-            return response(['error' => $e->getMessage()]);
+            return response(['error' => $e->getMessage()], 401);
         }
 
         return response($refreshToken);
@@ -46,6 +46,6 @@ class AuthController extends Controller implements HasMiddleware
     }
 
     public function logout() {
-        return auth()->logout();
+        auth()->logout();
     }
 }

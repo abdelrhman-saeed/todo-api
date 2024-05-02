@@ -12,6 +12,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller implements HasMiddleware
 {
@@ -26,6 +27,10 @@ class TaskController extends Controller implements HasMiddleware
     public function index(Request $request)
     {
         try {
+
+            if (auth()->user()->role == 'user' && $request->has('assignee')) {
+                return response('forbidden', 403);
+            }
 
             $tasks = Task::where(
                         $request->merge(['parent_task_id' => null])->all() )->with('dependencies');
@@ -55,6 +60,7 @@ class TaskController extends Controller implements HasMiddleware
     {
         Gate::authorize('view', $task);
 
+        // return $task->toArray();
         return new TaskResource($task);
     }
 
@@ -65,7 +71,7 @@ class TaskController extends Controller implements HasMiddleware
     {
         $task->fill($request->validated())->save();
         
-        Task::whereIn('id', $request->dependecies)
+        Task::whereIn('id', $request->dependencies)
                 ->update(['parent_task_id' => $task->id]);
     }
 

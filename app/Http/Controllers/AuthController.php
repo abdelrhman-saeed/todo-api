@@ -46,6 +46,6 @@ class AuthController extends Controller implements HasMiddleware
     }
 
     public function logout() {
-        auth()->logout();
+        auth()->logout(true);
     }
 }

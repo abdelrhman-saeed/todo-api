@@ -18,6 +18,8 @@ class UpdateTaskRequest extends FormRequest
             return false;
         }
 
+        if ($this->user()->role == '')
+
         // if any of the task dependencies status are not completed
         // the the main task won't be updated
         if ( $this->filled('status') && $this->status == 'completed'
@@ -37,7 +39,14 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         if ($this->user()->role == 'user') {
-            return ['status' => 'required|in:completed,canceled,pending'];
+            return [
+                'title'         => 'prohibited',
+                'description'   => 'prohibited',
+                'due_date'      => 'prohibited',
+                'assignee'      => 'prohibited',
+                'dependecies'   => 'prohibited',
+                'status'        => 'required|in:completed,canceled,pending',
+            ];
         }
         
         return [

@@ -18,8 +18,6 @@ class UpdateTaskRequest extends FormRequest
             return false;
         }
 
-        if ($this->user()->role == '')
-
         // if any of the task dependencies status are not completed
         // the the main task won't be updated
         if ( $this->filled('status') && $this->status == 'completed'

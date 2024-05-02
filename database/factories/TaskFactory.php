@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TaskFactory extends Factory
 {
-    private array $status = ['completed', 'canceled', 'pending'];
     /**
      * Define the model's default state.
      *
@@ -27,11 +26,11 @@ class TaskFactory extends Factory
 
             'due_date' => now()->addDays(rand(1,9)),
             
-            'status' => $this->status[rand(0,2)],
+            'status' => 'pending',
 
             'assignee' => rand(1,10),
 
-            'parent_task_id' => ($count = Task::count()) ? rand(1, $count) : null,
+            'parent_task_id' => null,
 
             'user_id' => rand(11,20)
         ];

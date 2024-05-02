@@ -46,7 +46,7 @@ class UpdateTaskRequest extends FormRequest
             'due_date'      => 'date',
             'status'        => 'in:completed,canceled,pending',
             'assignee'      => 'numeric',
-            'dependecies'   => 'array|nullable',
+            'dependecies'   => 'array|numeric|nullable',
         ];
     }
 

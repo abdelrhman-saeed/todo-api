@@ -43,7 +43,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
-        return $user->role == 'manager';
+        return $user->role == 'manager' && $task->dependencies()->count() == 0;
     }
 
     /**
@@ -59,6 +59,6 @@ class TaskPolicy
      */
     public function forceDelete(User $user, Task $task): bool
     {
-        return $user->role == 'manager';
+        return $user->role == 'manager' && $task->dependencies()->count() == 0;
     }
 }

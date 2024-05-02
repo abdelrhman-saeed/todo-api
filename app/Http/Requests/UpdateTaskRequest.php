@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Task;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -42,12 +41,12 @@ class UpdateTaskRequest extends FormRequest
         }
         
         return [
-            'title'         => 'alpha_num',
+            'title'         => 'string',
             'description'   => 'string',
             'due_date'      => 'date',
             'status'        => 'in:completed,canceled,pending',
             'assignee'      => 'numeric',
-            'task_id'       => 'numeric',
+            'dependecies'   => 'array|nullable',
         ];
     }
 

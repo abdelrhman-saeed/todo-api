@@ -6,6 +6,7 @@ use App\Models\Task;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Support\Facades\Log;
 
 class StoreTaskRequest extends FormRequest
 {
@@ -25,8 +26,8 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'         => 'required|alpha_num',
-            'description'   => 'required',
+            'title'         => 'required|string',
+            'description'   => 'required|string',
             'due_date'      => 'required|date',
             'status'        => 'required|in:completed,canceled,pending',
             'assignee'      => 'required|numeric',

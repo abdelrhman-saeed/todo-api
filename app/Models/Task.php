@@ -27,11 +27,11 @@ class Task extends Model
         return $this->hasMany(__CLASS__, 'parent_task_id', 'id');
     }
 
-    public function parenttask(): BelongsTo {
-        return $this->belongsTo(__CLASS__, 'parent_task_id', 'id');
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function withdependencies(): self {
-        return $this->with('dependencies')->first();
+    public function parenttask(): BelongsTo {
+        return $this->belongsTo(__CLASS__, 'parent_task_id', 'id');
     }
 }

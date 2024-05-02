@@ -14,6 +14,6 @@ class TaskResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return $this->merge( ['dependencies' => $this->dependencies] );
+        return Parent::toArray($request) + ['dependencies' => $this->whenLoaded('dependencies')];
     }
 }

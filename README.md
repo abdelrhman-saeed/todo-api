@@ -17,9 +17,14 @@ composer i
 cp .env.example .env
 ```
 > change the .env file
+
+```env
+
 - set APP_URL=127.0.0.1
 - set DB_HOST=127.0.0.1
 - set DB_PASSWORD=
+
+```
 
 ```cmd
 
